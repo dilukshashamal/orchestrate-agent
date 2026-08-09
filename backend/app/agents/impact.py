@@ -2,6 +2,7 @@ from app.models.enums import ImpactLevel, StockoutRisk
 from app.models.schemas import StockoutRiskRuleInput
 from app.workflows.rules import evaluate_stockout_risk_rule
 
+
 def run_impact_analysis_agent(po_data: dict, inventory_data: dict) -> dict:
     """
     Impact Analysis Agent: Calculates stockout countdown, financial exposure, and production impact.

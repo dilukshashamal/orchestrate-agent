@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
-from typing import List
+
 from fastapi import APIRouter, HTTPException
-from app.models.schemas import InventoryItem, Supplier, StockoutRiskRuleInput
+
+from app.models.schemas import InventoryItem, StockoutRiskRuleInput, Supplier
 from app.workflows.rules import evaluate_stockout_risk_rule
 
 router = APIRouter(prefix="/api/v1/erp", tags=["ERP"])
@@ -16,7 +17,7 @@ def _load_json(filename: str):
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-@router.get("/inventory", response_model=List[InventoryItem])
+@router.get("/inventory", response_model=list[InventoryItem])
 async def get_all_inventory():
     items_raw = _load_json("inventory.json")
     results = []
@@ -50,7 +51,7 @@ async def get_inventory_by_sku(sku: str):
             )
     raise HTTPException(status_code=404, detail=f"Inventory item SKU {sku} not found.")
 
-@router.get("/suppliers", response_model=List[Supplier])
+@router.get("/suppliers", response_model=list[Supplier])
 async def get_all_suppliers():
     suppliers_raw = _load_json("suppliers.json")
     return [Supplier(**s) for s in suppliers_raw]

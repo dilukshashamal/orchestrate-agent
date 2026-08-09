@@ -2,6 +2,7 @@ from app.models.enums import ImpactLevel
 from app.models.schemas import AlternativeSupplierRuleInput
 from app.workflows.rules import evaluate_alternative_supplier_rule
 
+
 def run_supplier_intel_agent(all_suppliers: list, current_supplier_id: str, production_impact_str: str) -> dict:
     """
     Supplier Intelligence Agent: Identifies alternative suppliers and checks rule engine evaluation.

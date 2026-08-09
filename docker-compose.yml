@@ -46,6 +46,11 @@ services:
     environment:
       - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/supply_chain
       - REDIS_URL=redis://redis:6379/0
+      - LANGSMITH_TRACING=true
+      - LANGSMITH_ENDPOINT=https://apac.api.smith.langchain.com
+      - LANGCHAIN_TRACING_V2=true
+      - LANGCHAIN_ENDPOINT=https://apac.api.smith.langchain.com
+      - LANGCHAIN_PROJECT=orchestrate-agent
     depends_on:
       postgres:
         condition: service_healthy
@@ -62,10 +67,9 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - WATCHPACK_POLLING=true
     depends_on:
       - backend
 

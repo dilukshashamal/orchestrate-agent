@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.config import settings
-from app.api.erp import router as erp_router
-from app.api.procurement import router as procurement_router
-from app.api.logistics import router as logistics_router
-from app.api.workflows import router as workflows_router
+
 from app.api.dashboard import router as dashboard_router
+from app.api.erp import router as erp_router
+from app.api.logistics import router as logistics_router
+from app.api.procurement import router as procurement_router
+from app.api.workflows import router as workflows_router
 
 app = FastAPI(
     title="Supply Chain Exception Agent API",

@@ -1,6 +1,7 @@
 from app.models.schemas import PurchaseApprovalRuleInput
 from app.workflows.rules import evaluate_purchase_approval_rule
 
+
 def run_procurement_agent(target_supplier: dict, purchase_value: float) -> dict:
     """
     Procurement Agent: Evaluates purchase preapproval and human approval policy rules.

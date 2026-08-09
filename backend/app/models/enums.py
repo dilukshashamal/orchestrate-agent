@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class StockoutRisk(str, Enum):
     LOW = "LOW"
     MEDIUM = "MEDIUM"

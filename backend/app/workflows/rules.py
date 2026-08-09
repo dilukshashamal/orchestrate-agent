@@ -1,11 +1,12 @@
-from app.models.enums import StockoutRisk, ImpactLevel, RuleAction
+from app.models.enums import ImpactLevel, RuleAction, StockoutRisk
 from app.models.schemas import (
-    DisruptionRuleInput,
     AlternativeSupplierRuleInput,
+    DisruptionRuleInput,
     PurchaseApprovalRuleInput,
+    RuleEvaluationResult,
     StockoutRiskRuleInput,
-    RuleEvaluationResult
 )
+
 
 def evaluate_disruption_rule(input_data: DisruptionRuleInput) -> RuleEvaluationResult:
     """

@@ -1,17 +1,19 @@
 import pytest
-from app.models.enums import StockoutRisk, ImpactLevel, RuleAction
+
+from app.models.enums import ImpactLevel, RuleAction, StockoutRisk
 from app.models.schemas import (
-    DisruptionRuleInput,
     AlternativeSupplierRuleInput,
+    DisruptionRuleInput,
     PurchaseApprovalRuleInput,
-    StockoutRiskRuleInput
+    StockoutRiskRuleInput,
 )
 from app.workflows.rules import (
-    evaluate_disruption_rule,
     evaluate_alternative_supplier_rule,
+    evaluate_disruption_rule,
     evaluate_purchase_approval_rule,
-    evaluate_stockout_risk_rule
+    evaluate_stockout_risk_rule,
 )
+
 
 @pytest.mark.parametrize(
     "delay_days, stockout_risk, expected_action",

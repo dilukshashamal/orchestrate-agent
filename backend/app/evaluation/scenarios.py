@@ -1,4 +1,6 @@
-HIGH_RISK_HIGH_VALUE_SCENARIO = {
+from typing import Any
+
+HIGH_RISK_HIGH_VALUE_SCENARIO: dict[str, Any] = {
     "scenario_id": "SCENARIO-001-HIGH-RISK-HIGH-VALUE",
     "name": "Delayed Microprocessor Shipment with High Stockout Risk ($60,000)",
     "description": "5-day shipment delay for Microprocessor X100 causing critical 4-day stockout countdown with $60,000 purchase value requiring human approval.",
@@ -50,7 +52,7 @@ HIGH_RISK_HIGH_VALUE_SCENARIO = {
     }
 }
 
-LOW_RISK_LOW_VALUE_SCENARIO = {
+LOW_RISK_LOW_VALUE_SCENARIO: dict[str, Any] = {
     "scenario_id": "SCENARIO-002-LOW-RISK-LOW-VALUE",
     "name": "Minor Delay Preapproved Order ($6,750)",
     "description": "4-day delay for small batch preapproved order ($6,750 < $10k threshold) with preapproved supplier SUP-002.",
@@ -92,7 +94,7 @@ LOW_RISK_LOW_VALUE_SCENARIO = {
     }
 }
 
-EVALUATION_SCENARIOS = [
+EVALUATION_SCENARIOS: list[dict[str, Any]] = [
     HIGH_RISK_HIGH_VALUE_SCENARIO,
     LOW_RISK_LOW_VALUE_SCENARIO
 ]

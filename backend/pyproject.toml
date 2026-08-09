@@ -1,0 +1,20 @@
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+ignore = [
+    "EXE002",  # Executable file without shebang (Windows file permissions)
+    "DTZ005",  # Naive datetime
+    "BLE001",  # Blind exception catch
+    "B008",    # Do not perform function call in argument defaults (FastAPI Query/Depends)
+]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_untyped_defs = false
+check_untyped_defs = true

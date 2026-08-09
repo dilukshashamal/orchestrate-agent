@@ -1,11 +1,12 @@
-from typing import List
+
 from fastapi import APIRouter
-from app.models.schemas import FreightRouteOption, FreightRouteRequest
+
 from app.models.enums import FreightMode
+from app.models.schemas import FreightRouteOption, FreightRouteRequest
 
 router = APIRouter(prefix="/api/v1/logistics", tags=["Logistics"])
 
-@router.get("/routes", response_model=List[FreightRouteOption])
+@router.get("/routes", response_model=list[FreightRouteOption])
 async def get_available_routes():
     return [
         FreightRouteOption(
@@ -37,7 +38,7 @@ async def get_available_routes():
         )
     ]
 
-@router.post("/calculate-route", response_model=List[FreightRouteOption])
+@router.post("/calculate-route", response_model=list[FreightRouteOption])
 async def calculate_freight_routes(request: FreightRouteRequest):
     weight_factor = request.cargo_weight_kg / 100.0
     

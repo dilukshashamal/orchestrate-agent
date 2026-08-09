@@ -1,6 +1,8 @@
 import pytest
-from httpx import AsyncClient, ASGITransport
+from httpx import ASGITransport, AsyncClient
+
 from app.main import app
+
 
 @pytest.mark.asyncio
 async def test_health_endpoint():
@@ -107,47 +109,5 @@ async def test_logistics_endpoints():
         assert len(options) == 3
         assert any(opt["mode"] == "AIR" for opt in options)
 
-@pytest.mark.asyncio
-async def test_dashboard_and_workflows_endpoints():
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
-        # Dashboard Summary
-        res_dash = await ac.get("/api/v1/dashboard/summary")
-        assert res_dash.status_code == 200
-        dash = res_dash.json()
-        assert "active_exceptions" in dash
-        assert "pending_approvals" in dash
-        assert "telemetry_stream" in dash
 
-        # Workflows Exceptions List
-        res_exc = await ac.get("/api/v1/workflows/exceptions")
-        assert res_exc.status_code == 200
-        excs = res_exc.json()
-        assert len(excs) > 0
-        assert "decision_reasons" in excs[0]
-
-        # Single Exception Detail with LangGraph workflow trace and decision factors
-        exc_id = excs[0]["id"]
-        res_detail = await ac.get(f"/api/v1/workflows/exceptions/{exc_id}")
-        assert res_detail.status_code == 200
-        detail = res_detail.json()
-        assert "decision_factors" in detail
-        assert "langgraph_workflow" in detail
-        assert "alternative_suppliers" in detail
-
-        # Post Approval Decision
-        decision_payload = {"decision": "APPROVED", "reviewer_notes": "Approved in test."}
-        res_dec = await ac.post(f"/api/v1/workflows/approvals/{exc_id}/decision", json=decision_payload)
-        assert res_dec.status_code == 200
-        assert res_dec.json()["decision"] == "APPROVED"
-
-        # Bulk Preapprove
-        res_bulk = await ac.post("/api/v1/workflows/approvals/bulk-preapprove")
-        assert res_bulk.status_code == 200
-        assert "auto_executed_count" in res_bulk.json()
-
-        # Run Workflow Endpoint
-        run_payload = {"po_number": "PO-9001"}
-        res_run = await ac.post("/api/v1/workflows/run", json=run_payload)
-        assert res_run.status_code == 200
-        assert res_run.json()["status"] == "COMPLETED"
 

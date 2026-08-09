@@ -1,29 +1,31 @@
-from typing import TypedDict, List, Dict, Any, Optional
-from langgraph.graph import StateGraph, END
+from typing import Any, TypedDict
+
 from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph import END, StateGraph
 
 from app.workflows.nodes import (
-    monitoring_node,
+    execution_node,
     impact_analysis_node,
-    supplier_intelligence_node,
     logistics_node,
+    monitoring_node,
     procurement_node,
-    execution_node
+    supplier_intelligence_node,
 )
 
+
 class SupplyChainState(TypedDict, total=False):
-    po_data: Dict[str, Any]
-    inventory_data: Dict[str, Any]
-    all_suppliers: List[Dict[str, Any]]
-    monitoring_result: Dict[str, Any]
-    impact_analysis: Dict[str, Any]
-    supplier_intelligence: Dict[str, Any]
-    logistics_recommendations: Dict[str, Any]
-    procurement_plan: Dict[str, Any]
+    po_data: dict[str, Any]
+    inventory_data: dict[str, Any]
+    all_suppliers: list[dict[str, Any]]
+    monitoring_result: dict[str, Any]
+    impact_analysis: dict[str, Any]
+    supplier_intelligence: dict[str, Any]
+    logistics_recommendations: dict[str, Any]
+    procurement_plan: dict[str, Any]
     requires_human_approval: bool
     approval_status: str
     current_step: str
-    history: List[str]
+    history: list[str]
 
 def check_disruption_edge(state: SupplyChainState) -> str:
     """Check if disruption is flagged to continue workflow or end."""

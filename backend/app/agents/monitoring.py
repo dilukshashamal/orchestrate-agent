@@ -2,6 +2,7 @@ from app.models.enums import StockoutRisk
 from app.models.schemas import DisruptionRuleInput
 from app.workflows.rules import evaluate_disruption_rule
 
+
 def run_monitoring_agent(po_data: dict, inventory_data: dict) -> dict:
     """
     Monitoring Agent: Scans shipment delay and evaluates disruption exception criteria via rules engine.

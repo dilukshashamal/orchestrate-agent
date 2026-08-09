@@ -1,6 +1,13 @@
-from typing import Optional, List
 from pydantic import BaseModel, Field
-from app.models.enums import StockoutRisk, ImpactLevel, RuleAction, ExceptionSeverity, POStatus, FreightMode
+
+from app.models.enums import (
+    FreightMode,
+    ImpactLevel,
+    POStatus,
+    RuleAction,
+    StockoutRisk,
+)
+
 
 class DisruptionRuleInput(BaseModel):
     supplier_delay_days: int = Field(..., description="Supplier delay in days")
@@ -42,8 +49,8 @@ class InventoryItem(BaseModel):
     reorder_point: int
     daily_usage_rate: int
     unit_of_measure: str
-    stockout_countdown_days: Optional[int] = None
-    stockout_risk: Optional[StockoutRisk] = None
+    stockout_countdown_days: int | None = None
+    stockout_risk: StockoutRisk | None = None
 
 # --- Procurement Schemas ---
 class PurchaseOrder(BaseModel):
@@ -65,9 +72,9 @@ class CreatePORequest(BaseModel):
     unit_price: float
 
 class UpdatePORequest(BaseModel):
-    status: Optional[POStatus] = None
-    actual_delay_days: Optional[int] = None
-    supplier_id: Optional[str] = None
+    status: POStatus | None = None
+    actual_delay_days: int | None = None
+    supplier_id: str | None = None
 
 # --- Logistics Schemas ---
 class FreightRouteRequest(BaseModel):

@@ -1,28 +1,33 @@
 import json
-from pathlib import Path
-from typing import List
 from datetime import datetime, timedelta
+from pathlib import Path
+
 from fastapi import APIRouter, HTTPException
-from app.models.schemas import PurchaseOrder, CreatePORequest, UpdatePORequest
+
 from app.models.enums import POStatus
+from app.models.schemas import CreatePORequest, PurchaseOrder, UpdatePORequest
 
 router = APIRouter(prefix="/api/v1/procurement", tags=["Procurement"])
 
 MOCK_DIR = Path(__file__).resolve().parent.parent / "data" / "mock"
 
-def _load_pos():
+from typing import Any
+
+
+def _load_pos() -> list[dict[str, Any]]:
     file_path = MOCK_DIR / "purchase_orders.json"
     if not file_path.exists():
         return []
     with open(file_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        data: list[dict[str, Any]] = json.load(f)
+        return data
 
-def _save_pos(pos: list):
+def _save_pos(pos: list[dict[str, Any]]) -> None:
     file_path = MOCK_DIR / "purchase_orders.json"
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(pos, f, indent=2)
 
-@router.get("/orders", response_model=List[PurchaseOrder])
+@router.get("/orders", response_model=list[PurchaseOrder])
 async def get_all_purchase_orders():
     pos = _load_pos()
     return [PurchaseOrder(**p) for p in pos]
@@ -58,7 +63,7 @@ async def create_purchase_order(request: CreatePORequest):
     }
     pos.append(new_po)
     _save_pos(pos)
-    return PurchaseOrder(**new_po)
+    return PurchaseOrder.model_validate(new_po)
 
 @router.patch("/orders/{po_number}", response_model=PurchaseOrder)
 async def update_purchase_order(po_number: str, request: UpdatePORequest):
