@@ -1,0 +1,46 @@
+[
+  {
+    "id": "SUP-001",
+    "name": "Titan Semiconductor Corp",
+    "rating": 4.8,
+    "lead_time_days": 14,
+    "unit_price": 120.0,
+    "capacity_units_per_week": 5000,
+    "is_preapproved": true,
+    "location": "Hsinchu, Taiwan",
+    "contact_email": "orders@titansemi.com"
+  },
+  {
+    "id": "SUP-002",
+    "name": "Apex Global Microelectronics",
+    "rating": 4.6,
+    "lead_time_days": 5,
+    "unit_price": 135.0,
+    "capacity_units_per_week": 2000,
+    "is_preapproved": true,
+    "location": "Austin, TX, USA",
+    "contact_email": "supply@apexmicro.com"
+  },
+  {
+    "id": "SUP-003",
+    "name": "Pacific Polymer Industries",
+    "rating": 3.9,
+    "lead_time_days": 8,
+    "unit_price": 45.0,
+    "capacity_units_per_week": 10000,
+    "is_preapproved": false,
+    "location": "Busan, South Korea",
+    "contact_email": "sales@pacificpolymer.kr"
+  },
+  {
+    "id": "SUP-004",
+    "name": "Vanguard Logistics & Components",
+    "rating": 4.9,
+    "lead_time_days": 3,
+    "unit_price": 150.0,
+    "capacity_units_per_week": 1500,
+    "is_preapproved": true,
+    "location": "Frankfurt, Germany",
+    "contact_email": "expedite@vanguardcomp.de"
+  }
+]

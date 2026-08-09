@@ -1,0 +1,29 @@
+[
+  {
+    "sku": "MAT-101",
+    "name": "Microprocessor X100",
+    "on_hand_qty": 120,
+    "safety_stock": 200,
+    "reorder_point": 300,
+    "daily_usage_rate": 25,
+    "unit_of_measure": "units"
+  },
+  {
+    "sku": "MAT-102",
+    "name": "Polymer Casing Mold B",
+    "on_hand_qty": 1500,
+    "safety_stock": 400,
+    "reorder_point": 600,
+    "daily_usage_rate": 50,
+    "unit_of_measure": "units"
+  },
+  {
+    "sku": "MAT-103",
+    "name": "High-Temp Capacitors Pack",
+    "on_hand_qty": 350,
+    "safety_stock": 500,
+    "reorder_point": 800,
+    "daily_usage_rate": 60,
+    "unit_of_measure": "packs"
+  }
+]
